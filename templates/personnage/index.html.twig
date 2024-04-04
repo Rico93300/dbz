@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personnage index
+{% endblock %}
+
+{% block body %}
+ <a href="{{ path('app_personnage_index') }}"class='btn btn-warning "'>principal</a>
+      {% for race in races %}
+      <a href="{{path('app_personnage_filter',{'id':race.id})}}" class='btn btn-warning "'>{{race.name}}</a>
+        {% endfor %}
+	<div class="perso-title">
+		<h1>PERSONNAGES</h1>
+	</div>
+
+
+	<div class="container ">
+		<div class="row justify-content-evenly">
+
+			{% for personnage in personnages %}
+				<div class="col-3 m-5">
+					<div class="card card-div p-3">
+						<img src="{{asset('uploads/image/' ~ personnage.image)}}" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title">
+								{{ personnage.name }}</h5>
+							<p class="card-text">
+								{{ personnage.description }}</p>
+							<p class="card-text">
+								{{ personnage.pouvoir }}</p>
+							<p class="card-text">
+								{{ personnage.race.name }}</p>
+
+							<a class="btn-show" href="{{ path('app_personnage_show', {'id': personnage.id}) }}">show</a>
+							<a class="btn-edit" href="{{ path('app_personnage_edit', {'id': personnage.id}) }}">edit</a>
+						</div>
+					</div>
+				</div>
+
+			{% else %}
+
+				<td colspan="6">no records found</td>
+
+			{% endfor %}
+		</div>
+	</div>
+
+	<a href="{{ path('app_personnage_new') }}">Create new</a>
+{% endblock %}

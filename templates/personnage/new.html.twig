@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Personnage{% endblock %}
+
+
+   
+{% block body %}
+<div class="col-3 mx-auto my-5 p-3 bg-light rounded-3" style="min-width:250px;max-width:300px;">
+    <h3>nouveau personnage</h3>
+
+    {{ include('personnage/_form.html.twig') }}
+
+    <a href="{{ path('app_personnage_index') }}">back to list</a>
+    </div>
+{% endblock %}

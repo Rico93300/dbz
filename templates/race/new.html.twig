@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New race{% endblock %}
+
+
+   
+{% block body %}
+<div class="col-3 mx-auto my-5 p-3 bg-light rounded-3" style="min-width:250px;max-width:300px;">
+    <h3>nouvelle categorie</h3>
+
+    {{ include('race/_form.html.twig') }}
+
+    <a href="{{ path('app_race_index') }}">back to list</a>
+    </div>
+{% endblock %}

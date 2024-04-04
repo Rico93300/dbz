@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}race index{% endblock %}
+
+{% block body %}
+    <h1 class="text-light-emphasis">Stock index</h1>
+
+    <table class="table  w-50 mx-auto">
+        <thead>
+            <tr>
+                
+                <th>name</th>
+                <th>actions</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for race in races %}
+            <tr>
+                
+                <td>{{ race.name }}</td>
+                
+                
+              
+                <td>
+                    
+                    <a href="{{ path('app_race_edit', {'id': race.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   <div class="mx-auto" style="width:200px">
+        <a href="{{ path('app_race_new') }}" class="btn btn-success">Create new</a>
+    </div>
+{% endblock %}
