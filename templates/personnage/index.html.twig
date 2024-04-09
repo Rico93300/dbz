@@ -4,10 +4,12 @@
 {% endblock %}
 
 {% block body %}
- <a href="{{ path('app_personnage_index') }}"class='btn btn-warning "'>principal</a>
+<div class='p-5'>
+ <a class="btn-choice" href="{{ path('app_personnage_index') }}">principal</a>
       {% for race in races %}
-      <a href="{{path('app_personnage_filter',{'id':race.id})}}" class='btn btn-warning "'>{{race.name}}</a>
+      <a class="btn-choice"href="{{path('app_personnage_filter',{'id':race.id})}}">{{race.name}}</a>
         {% endfor %}
+        </div>
 	<div class="perso-title">
 		<h1>PERSONNAGES</h1>
 	</div>
@@ -19,7 +21,7 @@
 			{% for personnage in personnages %}
 				<div class="col-3 m-5">
 					<div class="card card-div p-3">
-						<img src="{{asset('uploads/image/' ~ personnage.image)}}" class="card-img-top" alt="...">
+						<img src="{{asset('uploads/image/' ~ personnage.img)}}" style='height:50px'>;
 						<div class="card-body">
 							<h5 class="card-title">
 								{{ personnage.name }}</h5>

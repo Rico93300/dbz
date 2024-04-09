@@ -141,6 +141,7 @@ class PersonnageController extends AbstractController
             $entityManager->remove($personnage);
             $entityManager->flush();
         }
+        
 
         return $this->redirectToRoute('app_personnage_index', [], Response::HTTP_SEE_OTHER);
     }
