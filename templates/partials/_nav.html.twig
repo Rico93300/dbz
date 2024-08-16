@@ -11,6 +11,7 @@
 						<span class="visually-hidden">(current)</span>
 					</a>
 				</li>
+				{% if is_granted('ROLE_ADMIN') %}
 				<li class="nav-item">
 					<a class="nav-link active" href="{{path('app_personnage_index')}}">Accueil Personnage
 						<span class="visually-hidden">(current)</span>
@@ -21,8 +22,22 @@
 						<span class="visually-hidden">(current)</span>
 					</a>
 				</li>
+				{% endif %}
 			</ul>
+<div class="d-flex">
+				{% if is_granted('ROLE_ADMIN') %}
+					<a class="btn btn-grad me-2" href="{{path('app_user_index')}}">user</a>
+			
+				{% endif %}
+				{% if is_granted('ROLE_USER') %}
+					<a class="btn btn-grad me-2" href="{{path('app_profile')}}">Profil</a>
+					<a class="btn btn-grad me-2" href="{{path('app_logout')}}">Deconnexion</a>
+				{% else %}
 
+					<a class="btn btn-grad me-2" href="{{path('app_login')}}">Connexion</a>
+					<a class="btn btn-grad me-2" href="{{path('app_register')}}">Inscription</a>
+				{% endif %}
+			</div>
 		</div>
 	</div>
 </nav>
