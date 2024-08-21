@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Personnage{% endblock %}
+
+{% block body %}
+<div class="col-3 mx-auto my-5 p-3 bg-light rounded-3" style="min-width:250px;max-width:300px;">
+    <h3 class="text-center">Modifier</h3>
+    {{ form_start(form) }}
+        {# {{ form_widget(form) }} #}
+        <div class="d-flex flex-column  justify-content-center">
+        
+            <div class="w-75">
+             {{ form_row(form.comments, {
+                    label: 'commentaire :'
+                }) }}
+            </div>
+         {{ form_end(form) }}
+          {{ include('comment/_delete_form.html.twig') }}
+        </div>  
+</div>  
+{% endblock %}
