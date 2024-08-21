@@ -3,6 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Race;
+use App\Entity\User;
+use DateTimeImmutable;
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Entity\Personnage;
 use App\Form\PersonnageType;
 use App\Repository\RaceRepository;
@@ -81,13 +85,54 @@ class PersonnageController extends AbstractController
             'form' => $form,
         ]);
     }
+    // #[Route('/commentaire/save', name: 'app_personnage_save', methods: ['POST', 'GET'])]
+    // public function saveCommentaire(Request $request) {
+    //     var_dump('method save');
+    //     if(isset($_POST)){var_dump($_POST); }
+    //     return new Response();
+    // }
 
-    #[Route('/{id}', name: 'app_personnage_show', methods: ['GET'])]
-    public function show(Personnage $personnage): Response
+    #[Route('/{id}', name: 'app_personnage_show', methods: ['GET', 'POST'])]
+    public function show(Personnage $personnage, Request $request, User $user ,EntityManagerInterface $entityManager ): Response
     {
-        return $this->render('personnage/show.html.twig', [
-            'personnage' => $personnage,
-        ]);
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        // $form->handleRequest($request);
+        // $form = $this->createFormBuilder($comment)
+
+        // ->add('comments', TextType::class)
+        // ->add('save', SubmitType::class, ['label' => 'Post comment'])
+        // ->getForm();
+        
+         $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+           $comment->setCreateAt(new DateTimeImmutable());
+           $comment->setPersonnage($personnage);
+           $comment->setUser($this->getUser());
+           
+            
+            
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_personnage_index', [], Response::HTTP_SEE_OTHER);
+            // return new Response();
+        }else {
+
+            return $this->render('personnage/show.html.twig', [
+                'personnage'=>$personnage,
+                'comment' => $comment,
+                'userCommentaire' => $this->getUser(),
+                'form' => $form,
+
+            ]);
+
+        }
+
+        
+            
+        
     }
 
     #[Route('/{id}/edit', name: 'app_personnage_edit', methods: ['GET', 'POST'])]
